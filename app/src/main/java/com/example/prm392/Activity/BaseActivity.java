@@ -1,6 +1,8 @@
-package com.example.prm392;
+package com.example.prm392.Activity;
 
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,5 +20,9 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         database =  FirebaseDatabase.getInstance();
+
+        Window w=getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 }
