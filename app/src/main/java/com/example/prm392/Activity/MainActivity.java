@@ -1,13 +1,10 @@
 package com.example.prm392.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +17,6 @@ import com.example.prm392.Adapter.SliderAdapter;
 import com.example.prm392.Domain.CategoryDomain;
 import com.example.prm392.Domain.ItemsDomain;
 import com.example.prm392.Domain.SliderItems;
-import com.example.prm392.R;
 import com.example.prm392.databinding.ActivityMainBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,12 +34,10 @@ public class MainActivity extends BaseActivity {
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         initBanner();
         initCategory();
         initPopular();
-
-
+        bottomNavigation();
 
 //        EdgeToEdge.enable(this);
 //        setContentView(R.layout.activity_main);
@@ -53,6 +47,10 @@ public class MainActivity extends BaseActivity {
 //            return insets;
 //        });
 
+    }
+
+    private void bottomNavigation(){
+        binding.cartBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,CartActivity.class)));
     }
 
     private void initPopular() {
