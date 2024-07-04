@@ -6,6 +6,10 @@ public class SliderItems {
     public SliderItems() {
     }
 
+    public SliderItems(String url) {
+        this.url = url;
+    }
+
     public String getUrl() {
         return url;
     }
