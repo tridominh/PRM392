@@ -136,9 +136,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Delivery"
+                    android:layout_marginTop="3dp"
+
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/textView10"
+                    app:layout_constraintStart_toStartOf="@id/textView10"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="32dp" />
 
@@ -149,6 +153,8 @@
                     android:text="$-"
                     android:textColor="@color/green"
                     android:textSize="16sp"
+                    app:layout_constraintTop_toBottomOf="@id/totalFeeTxt"
+                    app:layout_constraintStart_toStartOf="@id/totalFeeTxt"
                     tools:layout_editor_absoluteX="366dp"
                     tools:layout_editor_absoluteY="32dp" />
 
@@ -157,9 +163,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total Tax"
+                    android:layout_marginTop="3dp"
+
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/textView13"
+                    app:layout_constraintStart_toStartOf="@id/textView13"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="68dp" />
 
@@ -170,7 +180,8 @@
                     android:text="$-"
                     android:textColor="@color/green"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/deliveryTxt"
+                    app:layout_constraintStart_toStartOf="@id/deliveryTxt"
                     tools:layout_editor_absoluteY="68dp" />
 
                 <View
@@ -179,6 +190,7 @@
                     android:layout_height="1dp"
                     android:layout_marginStart="1dp"
                     android:background="#D2D2D2"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:layout_editor_absoluteY="99dp" />
 
@@ -187,9 +199,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total"
+                    android:layout_marginTop="3dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/textView15"
+                    app:layout_constraintStart_toStartOf="@id/textView15"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="125dp" />
 
@@ -200,6 +215,8 @@
                     android:text="$-"
                     android:textColor="@color/green"
                     android:textSize="16sp"
+                    app:layout_constraintTop_toBottomOf="@id/taxTxt"
+                    app:layout_constraintStart_toStartOf="@id/deliveryTxt"
                     tools:layout_editor_absoluteX="366dp"
                     tools:layout_editor_absoluteY="125dp" />
 
