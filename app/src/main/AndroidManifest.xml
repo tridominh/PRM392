@@ -19,6 +19,9 @@
             android:name=".Activity.ProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.FirebaseUIActivity"
             android:exported="true">
             <intent-filter>
