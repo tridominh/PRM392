@@ -299,6 +299,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/profile_btn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -318,6 +319,31 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="Profile"
+                        android:textAlignment="center"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/chatBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@android:drawable/ic_dialog_email" />
+
+                    <TextView
+                        android:id="@+id/textView55"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Chat"
                         android:textAlignment="center"
                         android:textSize="12sp" />
                 </LinearLayout>

@@ -16,7 +16,7 @@ import com.example.prm392.databinding.ActivityCartBinding;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 
-public class CartActivity extends BaseActivity {
+public class CartActivity extends AppCompatActivity {
     ActivityCartBinding binding;
     private double tax;
     private ManagementCart managementCart;
@@ -70,6 +70,7 @@ public class CartActivity extends BaseActivity {
     private void updateBadgeCount(int count) {
         boolean success = ShortcutBadger.applyCount(this, count);
         if (!success) {
+            // Notify the user with a Toast message
             Toast.makeText(this, "Failed to apply badge count", Toast.LENGTH_SHORT).show();
             Log.e("Badge Count", "Failed to apply badge count");
         }

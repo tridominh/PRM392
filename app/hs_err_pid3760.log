@@ -1,0 +1,227 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 123731968 bytes for G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3528), pid=3760, tid=2356
+#
+# JRE version:  (20.0.1+9) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (20.0.1+9-29, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Djava.awt.headless=true -Djava.library.path=C:\Program Files\Java\jdk-20\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\DELL\AppData\Local\Programs\Python\Python312\Scripts\;C:\Program Files\dotnet\;C:\Users\DELL\AppData\Local\Programs\Python\Python312\;C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin;C:\Users\DELL\.kube;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Java\jdk-20\bin;C:\Program Files\NetBeans 8.2\extide\ant\bin;F:\netbeans-18-bin\netbeans\java\maven\bin;C:\Program Files\Git\cmd;C:\Program Files\apache-tomcat-11.0.0-M6\BIN;C:\zig\zig-windows-x86_64-0.12.0-dev.694+937e8cb70;C:\Users\DELL\AppData\Local\Programs\Python\Python312;C:\Users\DELL\AppData\Local\Programs\Python\Python312\Scripts;E:\Docker\Docker\resources\bin;E:\minikube;C:\Windows\System32;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Users\DELL\AppData\Local\Programs\Python\Python312;F:\node-js\;C:\ProgramData\chocolatey\bin;E:\msys32\ucrt64\bin;C:\Program Files\GitHub CLI\;C:\Program Files\PowerShell\7\;E:\Android\platform-tools;C:\Users\DELL\.cargo\bin;C:\Users\DELL\AppData\Local\Programs\Python\Launcher\;C:\Users\DELL\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\Azure Data Studio\bin;C:\Users\DELL\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\DELL\.dotnet\tools;E:\Neovim\bin;E:\zig\zig-windows-x86_64-0.12.0;C:\Users\DELL\AppData\Roaming\npm;C:\Users\DELL\AppData\Local\Programs\oh-my-posh\bin;C:\Users\DELL\.dotnet\tools;.;E:\prm\PRM392\app\src\testDebug\jniLibs;E:\prm\PRM392\app\src\test\jniLibs -Dorg.gradle.internal.worker.tmpdir=E:\prm\PRM392\app\build\tmp\testDebugUnitTest\work -Dorg.gradle.native=false -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -ea worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 1'
+
+Host: AMD Ryzen 5 5500U with Radeon Graphics         , 12 cores, 7G,  Windows 11 , 64 bit Build 22621 (10.0.22621.3672)
+Time: Wed Jul 10 08:19:40 2024 SE Asia Standard Time elapsed time: 0.063988 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000024271e59ff0):  JavaThread "Unknown thread" [_thread_in_vm, id=2356, stack(0x000000a93fc00000,0x000000a93fd00000)]
+
+Stack: [0x000000a93fc00000,0x000000a93fd00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6bb95a]
+V  [jvm.dll+0x8485fa]
+V  [jvm.dll+0x84a1f5]
+V  [jvm.dll+0x84a8f3]
+V  [jvm.dll+0x280b0f]
+V  [jvm.dll+0x6b86e9]
+V  [jvm.dll+0x6ad2da]
+V  [jvm.dll+0x35adf5]
+V  [jvm.dll+0x363016]
+V  [jvm.dll+0x3b3b3e]
+V  [jvm.dll+0x3b3dc5]
+V  [jvm.dll+0x32b50a]
+V  [jvm.dll+0x32c32b]
+V  [jvm.dll+0x8112bf]
+V  [jvm.dll+0x3c0d91]
+V  [jvm.dll+0x7fcfe3]
+V  [jvm.dll+0x44c76f]
+V  [jvm.dll+0x44e0e1]
+C  [jli.dll+0x5287]
+C  [ucrtbase.dll+0x29333]
+C  [KERNEL32.DLL+0x1257d]
+C  [ntdll.dll+0x5af28]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ff862baa098, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x0000024271e8d3c0 WorkerThread "GC Thread#0" [stack: 0x000000a93fd00000,0x000000a93fe00000] [id=15200]
+  0x0000024271e92380 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000a93fe00000,0x000000a93ff00000] [id=12328]
+  0x0000024271e92cc0 WorkerThread "G1 Conc#0" [stack: 0x000000a93ff00000,0x000000a940000000] [id=2544]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ff86238eb47]
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x0000024271e55070] Heap_lock - owner thread: 0x0000024271e59ff0
+
+Heap address: 0x00000000e0000000, size: 512 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 0.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 5 size 8 Array Of Cards #cards 12 size 40 Howl #buckets 4 coarsen threshold 1843 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 2048
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x00000000e0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ff862763c59]
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.037 Loaded shared library C:\Program Files\Java\jdk-20\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff6632b0000 - 0x00007ff6632c0000 	C:\Program Files\Java\jdk-20\bin\java.exe
+0x00007ff8d06b0000 - 0x00007ff8d08c7000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ff8ce3f0000 - 0x00007ff8ce4b4000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ff8cdaa0000 - 0x00007ff8cde4c000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ff8ce2d0000 - 0x00007ff8ce3e1000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ff8b9760000 - 0x00007ff8b977b000 	C:\Program Files\Java\jdk-20\bin\VCRUNTIME140.dll
+0x00007ff8b9780000 - 0x00007ff8b9799000 	C:\Program Files\Java\jdk-20\bin\jli.dll
+0x00007ff8cec30000 - 0x00007ff8cece2000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ff8cee50000 - 0x00007ff8ceef7000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ff8cf8a0000 - 0x00007ff8cf94a000 	C:\WINDOWS\System32\sechost.dll
+0x00007ff8cdf00000 - 0x00007ff8cdf28000 	C:\WINDOWS\System32\bcrypt.dll
+0x00007ff8cf4c0000 - 0x00007ff8cf5d5000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ff8cf960000 - 0x00007ff8cfb0e000 	C:\WINDOWS\System32\USER32.dll
+0x00007ff8cded0000 - 0x00007ff8cdef6000 	C:\WINDOWS\System32\win32u.dll
+0x00007ff8ce4c0000 - 0x00007ff8ce4e9000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ff8cdfa0000 - 0x00007ff8ce0b9000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ff8ce230000 - 0x00007ff8ce2ca000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ff8bb560000 - 0x00007ff8bb7f3000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.3672_none_2713b9d173822955\COMCTL32.dll
+0x00007ff8c5140000 - 0x00007ff8c514a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ff8cecf0000 - 0x00007ff8ced21000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ff8ba670000 - 0x00007ff8ba67c000 	C:\Program Files\Java\jdk-20\bin\vcruntime140_1.dll
+0x00007ff877250000 - 0x00007ff8772de000 	C:\Program Files\Java\jdk-20\bin\msvcp140.dll
+0x00007ff862050000 - 0x00007ff862ce7000 	C:\Program Files\Java\jdk-20\bin\server\jvm.dll
+0x00007ff8c9270000 - 0x00007ff8c9279000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ff8ce4f0000 - 0x00007ff8ce561000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ff8c6c00000 - 0x00007ff8c6c34000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ff8cca10000 - 0x00007ff8cca28000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ff8ba5f0000 - 0x00007ff8ba5fa000 	C:\Program Files\Java\jdk-20\bin\jimage.dll
+0x00007ff8c06d0000 - 0x00007ff8c0902000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ff8cf120000 - 0x00007ff8cf4a8000 	C:\WINDOWS\System32\combase.dll
+0x00007ff8cfbd0000 - 0x00007ff8cfca7000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ff88b0f0000 - 0x00007ff88b122000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ff8cde50000 - 0x00007ff8cdecb000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ff8791e0000 - 0x00007ff879206000 	C:\Program Files\Java\jdk-20\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Java\jdk-20\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.3672_none_2713b9d173822955;C:\Program Files\Java\jdk-20\bin\server
+
+VM Arguments:
+jvm_args: -Djava.awt.headless=true -Djava.library.path=C:\Program Files\Java\jdk-20\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\DELL\AppData\Local\Programs\Python\Python312\Scripts\;C:\Program Files\dotnet\;C:\Users\DELL\AppData\Local\Programs\Python\Python312\;C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin;C:\Users\DELL\.kube;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Java\jdk-20\bin;C:\Program Files\NetBeans 8.2\extide\ant\bin;F:\netbeans-18-bin\netbeans\java\maven\bin;C:\Program Files\Git\cmd;C:\Program Files\apache-tomcat-11.0.0-M6\BIN;C:\zig\zig-windows-x86_64-0.12.0-dev.694+937e8cb70;C:\Users\DELL\AppData\Local\Programs\Python\Python312;C:\Users\DELL\AppData\Local\Programs\Python\Python312\Scripts;E:\Docker\Docker\resources\bin;E:\minikube;C:\Windows\System32;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Users\DELL\AppData\Local\Programs\Python\Python312;F:\node-js\;C:\ProgramData\chocolatey\bin;E:\msys32\ucrt64\bin;C:\Program Files\GitHub CLI\;C:\Program Files\PowerShell\7\;E:\Android\platform-tools;C:\Users\DELL\.cargo\bin;C:\Users\DELL\AppData\Local\Programs\Python\Launcher\;C:\Users\DELL\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\Azure Data Studio\bin;C:\Users\DELL\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\DELL\.dotnet\tools;E:\Neovim\bin;E:\zig\zig-windows-x86_64-0.12.0;C:\Users\DELL\AppData\Roaming\npm;C:\Users\DELL\AppData\Local\Programs\oh-my-posh\bin;C:\Users\DELL\.dotnet\tools;.;E:\prm\PRM392\app\src\testDebug\jniLibs;E:\prm\PRM392\app\src\test\jniLibs -Dorg.gradle.internal.worker.tmpdir=E:\prm\PRM392\app\build\tmp\testDebugUnitTest\work -Dorg.gradle.native=false -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -ea 
+java_command: worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 1'
+java_class_path (initial): C:\\Users\\DELL\\.gradle\\caches\\8.6\\workerMain\\gradle-worker.jar;E:\\prm\\PRM392\\app\\build\\intermediates\\javac\\debugUnitTest\\compileDebugUnitTestJavaWithJavac\\classes;E:\\prm\\PRM392\\app\\build\\intermediates\\runtime_app_classes_jar\\debug\\bundleDebugClassesToRuntimeJar\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\junit\\junit\\4.13.2\\8ac9e16d933b6fb43bc7f576336b8f4d7eb5ba12\\junit-4.13.2.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\1e6fe5d617c7616f6c8105efd634caef\\transformed\\viewbinding-8.4.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\6ef8def79af4c25de9a2bc01d0de4c08\\transformed\\navigation-common-2.7.7-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\82fc2b4ec2f835a177041a1b506b94c6\\transformed\\navigation-runtime-2.7.7-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\6b0278d644fa3aac4e686b8dc6db9999\\transformed\\navigation-fragment-2.7.7-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\873b5ed472c20bb00ce5800dcbd79c1f\\transformed\\navigation-ui-2.7.7-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\ea32dbf4fabf27d634fbeca8fa74e4c1\\transformed\\firebase-ui-auth-7.2.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\edf2a63ee814a00c3acf2489c66016b2\\transformed\\material-1.12.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\1d741140ee399d773f10580e515bb2e0\\transformed\\constraintlayout-2.1.4-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\7806c5cafcfa9ae44a6680f9b9dd0fb5\\transformed\\appcompat-resources-1.7.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\180a98e5de4c9170f220814bed36e440\\transformed\\library-1.6.1-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\9b7be7f376fb281c09512c3b836bf595\\transformed\\appcompat-1.7.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\97b2cbbd038d1859e02df16f0bd2bc99\\transformed\\glide-4.12.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\0f9d14442d66036912d01a042c6954a5\\transformed\\firebase-auth-21.0.1-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\0c1b52884811909da5574e3813f07a5f\\transformed\\viewpager2-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\da42c54282f50f79a58f7b4cf51e89aa\\transformed\\firebase-database-21.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\8bef1e90c709eb8d547463a085e2750f\\transformed\\firebase-appcheck-interop-17.1.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\9fdda8d86efca0fa79aa75939f391a91\\transformed\\firebase-database-collection-18.0.1-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\61e5c9ef9b8cb6a2e2331039e24a5628\\transformed\\play-services-auth-19.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\b1fc2a097e67d7baab0a9877e2670ee3\\transformed\\play-services-auth-api-phone-17.4.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\863a2c62229e21055525a958415d141c\\transformed\\play-services-safetynet-17.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\d51d5737a7eaa3e10f64bb7827592a45\\transformed\\play-services-auth-base-17.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\b7a4cf9c36677bc3895f072b2a89449c\\transformed\\play-services-base-18.1.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\ad48178cc622f02fab1cee87178affa6\\transformed\\firebase-common-ktx-21.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\136f9090bb48668ec2eba9f25f1d3626\\transformed\\firebase-auth-interop-20.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\f1bd474cb4a0967684ff602bacff9330\\transformed\\firebase-common-21.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\9aab35de39ac2ecb08d69ed226d6511a\\transformed\\fragment-ktx-1.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\5775f2ce1dc9dace38fd866f19285182\\transformed\\activity-ktx-1.9.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\2645d3797e813a01773fc8ed2711a852\\transformed\\savedstate-ktx-1.2.1-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\f26ab6b49e0200ea44a4835039ad79fe\\transformed\\savedstate-1.2.1-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\7adb4cbab1fc83dfa41b736e2e06c7b6\\transformed\\lifecycle-extensions-2.2.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\a39d873a7f2fe1a2b6598295342d0d45\\transformed\\browser-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\799f6083bc8a94111ce2372018245c3d\\transformed\\legacy-support-v4-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\ff07e0b69cadd4a945439b72c9340e50\\transformed\\legacy-support-core-ui-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\ee1f06082608be17d086e4c2f0fcaf7a\\transformed\\slidingpanelayout-1.2.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\5241462f0c72fd7103fbd40f763aecf3\\transformed\\transition-1.5.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\8c082cfdec679c1bbc261e82b700b3e2\\transformed\\dynamicanimation-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\2166068c43e56ea492929b2a0b1199da\\transformed\\legacy-support-core-utils-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\3640b9747de26749fb842d8802765317\\transformed\\loader-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\82449693b623778ec2cce43af6bca893\\transformed\\emoji2-views-helper-1.3.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\596d4e443c86b015282846439ca039ef\\transformed\\emoji2-1.3.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\6216cc27823e9738937e7d4d0950b3df\\transformed\\lifecycle-viewmodel-2.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\5ca2ce004f9092c06d11ce47806f0b22\\transformed\\lifecycle-service-2.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\f9007120b9bcfcec16297912a3f6f467\\transformed\\lifecycle-process-2.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\f0f53932cf72dc980b4fc487e725176e\\transformed\\lifecycle-livedata-core-ktx-2.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\8e538ff1cefb596b00fe27252b7e9f48\\transformed\\lifecycle-livedata-core-2.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\1da4d27ac90c8c6c566f4b13f89756fa\\transformed\\lifecycle-livedata-2.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\androidx.lifecycle\\lifecycle-common\\2.6.2\\10f354fdb64868baecd67128560c5a0d6312c495\\lifecycle-common-2.6.2.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\eddf730f865553023dff5d2ef0c7d3d2\\transformed\\lifecycle-runtime-ktx-2.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\819bcbb060e652e414942cbe0537d73a\\transformed\\lifecycle-viewmodel-savedstate-2.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\4a20d684b7a5b57eb48b70b3c3678fba\\transformed\\core-ktx-1.13.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\1cb12cf9fad71b14e073d9572aecc23a\\transformed\\drawerlayout-1.1.1-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\891c5a7cd745975f1c6c8ca5d1edaeed\\transformed\\coordinatorlayout-1.1.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\1c0dbe797f33d342a450be1b7830856e\\transformed\\vectordrawable-animated-1.1.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\0cfb2e8c57b3d05a18c15db18bfd62fa\\transformed\\vectordrawable-1.1.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\53f7b85277dc46c55c05dab7c3b02002\\transformed\\recyclerview-1.1.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\86a8adcf33e517d0ebb82601eea7d8f5\\transformed\\viewpager-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\2c02c022038add0911b5e7b4a27ff823\\transformed\\customview-1.1.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\8eda3e653aacd9fb5c790853ff329b30\\transformed\\window-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\28f8e6ac4219ced88d35002f9deb868b\\transformed\\media-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\4d703c071636099e604dc835422d6b2e\\transformed\\swiperefreshlayout-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\62281aff66d06b9712200609f9cd8114\\transformed\\asynclayoutinflater-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\e0a6ca24fec33ee704af8681f6b1d753\\transformed\\core-1.13.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\8738f2feb1c3ac09ec0741236462bcfc\\transformed\\lifecycle-runtime-2.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\3b318af232c173f685b786fc91fb0d70\\transformed\\lifecycle-viewmodel-ktx-2.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlinx\\kotlinx-coroutines-android\\1.6.4\\f955fc8b2ad196e2f4429598440e15f7492eeb2b\\kotlinx-coroutines-android-1.6.4.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlinx\\kotlinx-coroutines-core-jvm\\1.6.4\\2c997cd1c0ef33f3e751d3831929aeff1390cb30\\kotlinx-coroutines-core-jvm-1.6.4.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlinx\\kotlinx-coroutines-play-services\\1.6.4\\e8e5e0dbe20eadc35a0eb112bcc1b2089768c906\\kotlinx-coroutines-play-services-1.6.4.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\71b4c178b6732b2ba88a8e71d304e226\\transformed\\play-services-tasks-18.1.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\4edb1f781fca665e1a34baf3183a1ab5\\transformed\\play-services-basement-18.3.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\eeaf3162c3593edfd52e6eb52c11451f\\transformed\\fragment-1.6.2-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\84e58758e4cf3a4a37e47e3e6e6c9754\\transformed\\activity-1.9.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\com.google.code.gson\\gson\\2.9.1\\2cc2131b98ebfb04e2b2c7dfb84431f4045096b\\gson-2.9.1.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\org.hamcrest\\hamcrest-core\\1.3\\42a25dc3219429f0e5d060061f71acb49bf010a0\\hamcrest-core-1.3.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\84672daa1eb33b8ab50caf90a1773542\\transformed\\cursoradapter-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\11c633ee7301b8fc0b9b7e62c65acb75\\transformed\\profileinstaller-1.3.1-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\androidx.resourceinspection\\resourceinspection-annotation\\1.0.1\\8c21f8ff5d96d5d52c948707f7e4d6ca6773feef\\resourceinspection-annotation-1.0.1.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\2d477bfd11477c738258f60b7a480587\\transformed\\cardview-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\c717e40a333ddf9fd39d42e7cc88ea92\\transformed\\startup-runtime-1.1.1-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\c66ef6043f6446210a9d8fe0da4d260e\\transformed\\tracing-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\4c5f27c2eeb54802b70a43ce246cc048\\transformed\\firebase-components-18.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\09e6dcd26368370e1489e759fc888f99\\transformed\\gifdecoder-4.12.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\c376fa799eca498917379e90ef845277\\transformed\\exifinterface-1.2.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\f96f91ad718d858c8ddc08da2f1bcd84\\transformed\\localbroadcastmanager-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\934042d6203ba02f5b18da866fd2978c\\transformed\\interpolator-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\c60465d02e6fbf9b2d9dc2fb80a800da\\transformed\\versionedparcelable-1.1.1-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\androidx.collection\\collection-ktx\\1.1.0\\f807b2f366f7b75142a67d2f3c10031065b5168\\collection-ktx-1.1.0.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\androidx.collection\\collection\\1.1.0\\1f27220b47669781457de0d600849a5de0e89909\\collection-1.1.0.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\androidx.concurrent\\concurrent-futures\\1.1.0\\50b7fb98350d5f42a4e49704b03278542293ba48\\concurrent-futures-1.1.0.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\69b74ca91fd379b95956f9ba7401fbae\\transformed\\core-runtime-2.2.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\androidx.arch.core\\core-common\\2.2.0\\5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3\\core-common-2.2.0.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\107732b67ec61a560334ab7f833f154c\\transformed\\documentfile-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\962de957cb5fb2170ca2057b3820ec38\\transformed\\print-1.0.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\867eee6eaa07cd43f5cbd03713888062\\transformed\\annotation-experimental-1.4.0-runtime.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlin\\kotlin-stdlib-jdk8\\1.8.22\\b25c86d47d6b962b9cf0f8c3f320c8a10eea3dd1\\kotlin-stdlib-jdk8-1.8.22.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\androidx.annotation\\annotation-jvm\\1.6.0\\a7257339a052df0f91433cf9651231bbb802b502\\annotation-jvm-1.6.0.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlin\\kotlin-stdlib-jdk7\\1.8.22\\4dabb8248310d833bb6a8b516024a91fd3d275c\\kotlin-stdlib-jdk7-1.8.22.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlin\\kotlin-stdlib\\1.8.22\\636bf8b320e7627482771bbac9ed7246773c02bd\\kotlin-stdlib-1.8.22.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\com.google.errorprone\\error_prone_annotations\\2.26.0\\c513866fd91bb46587500440a80fa943e95d12d9\\error_prone_annotations-2.26.0.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\androidx.constraintlayout\\constraintlayout-core\\1.0.4\\29cdbe03ded6b0980f63fa5da2579a430e911c40\\constraintlayout-core-1.0.4.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\com.github.bumptech.glide\\disklrucache\\4.12.0\\6d44c9103551e3ff51f00ac26077c143a8fb74f9\\disklrucache-4.12.0.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\com.github.bumptech.glide\\annotations\\4.12.0\\298d793db124809d74ad9a90de5eddc408898c84\\annotations-4.12.0.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\com.google.guava\\listenablefuture\\1.0\\c949a840a6acbc5268d088e47b04177bf90b3cad\\listenablefuture-1.0.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlin\\kotlin-stdlib-common\\1.8.22\\1a8e3601703ae14bb58757ea6b2d8e8e5935a586\\kotlin-stdlib-common-1.8.22.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains\\annotations\\13.0\\919f0dfe192fb4e063e7dacadee7f8bb9a2672a9\\annotations-13.0.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\com.google.firebase\\firebase-annotations\\16.2.0\\ba0806703ca285d03fa9c888b5868f101134a501\\firebase-annotations-16.2.0.jar;C:\\Users\\DELL\\.gradle\\caches\\modules-2\\files-2.1\\javax.inject\\javax.inject\\1\\6975da39a7040257bd51d21a231b76c915872d38\\javax.inject-1.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\d719b7b5e37a1188931fc4a4b23cad81\\transformed\\viewbinding-8.4.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\54cc04296f76f3670cfececd0f7e8d0e\\transformed\\navigation-common-2.7.7\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\b596672044c70c0a8101e84682261ae2\\transformed\\navigation-runtime-2.7.7\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\7158ca4d77e5fc57a62640df6bb3df42\\transformed\\navigation-fragment-2.7.7\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\afaedd1ed47cebc8a70b98612af61ed8\\transformed\\navigation-ui-2.7.7\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\9f062708c1f1b294098145b1abd45a79\\transformed\\firebase-ui-auth-7.2.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\9709dce661d4587ac56e9336ebc10789\\transformed\\material-1.12.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\85892abe681d0ee7d5e9d85f4b5d4b68\\transformed\\constraintlayout-2.1.4\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\bd30bdd3f419bca8eb5642c558e805d2\\transformed\\appcompat-resources-1.7.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\f2907f8d3fad99ac3c15ffdaae27cd05\\transformed\\library-1.6.1\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\228a5ec0920d84014f386ec0ea68ab07\\transformed\\appcompat-1.7.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\543871222a5d6b4890b1b91bf5f414bd\\transformed\\glide-4.12.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\9624cdb461b98d550d50977bb163b3e9\\transformed\\firebase-auth-21.0.1\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\b506e2f9967cb5cec1a9c6ab51aeb69a\\transformed\\viewpager2-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\233d8cbbb095a406c05de67c10fd8e7d\\transformed\\firebase-database-21.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\c8ba0c578c2ce5117314162f13a5d4a5\\transformed\\firebase-appcheck-interop-17.1.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\094ab554fd83859a92fbb5fe72db4b25\\transformed\\firebase-database-collection-18.0.1\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\f5b0f9410867d6834594a84a1d1be4dd\\transformed\\play-services-auth-19.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\ad1cf7ab430e4a4ba4a32de52fd2d33d\\transformed\\play-services-auth-api-phone-17.4.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\7b9768fe262cdb96d291513a62686045\\transformed\\play-services-safetynet-17.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\9fbe170961889a086f46e599cb4fc233\\transformed\\play-services-auth-base-17.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\584be75c66b60b9a0b90a45d4265384e\\transformed\\play-services-base-18.1.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\10bd1070e3716e8d6180f7c7f716eab7\\transformed\\firebase-common-ktx-21.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\97b3ad36cce35e2881aa4da4e13a2c38\\transformed\\firebase-auth-interop-20.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\ae2247c6c0d5c523b64bfd88956f8605\\transformed\\firebase-common-21.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\f298a255784e07d2a664f98138ae5556\\transformed\\fragment-ktx-1.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\00b73f90ba7d35c3fc76e2a29b50c8f4\\transformed\\activity-ktx-1.9.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\8206fabae4fa625c15a13f35b56cc547\\transformed\\savedstate-ktx-1.2.1\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\e91d118d654346530831995963e9a9d6\\transformed\\savedstate-1.2.1\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\73aa83de6b3984a004bf8be0855f0776\\transformed\\lifecycle-extensions-2.2.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\c3be6d39bd5412d17f3182e105a47fae\\transformed\\browser-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\4f749336decdee12248bae0a9c4e2332\\transformed\\legacy-support-v4-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\b1339c63be03ad1967f0f11703d9e9ce\\transformed\\legacy-support-core-ui-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\f753e760e051156eb01ec408e7ace1a3\\transformed\\slidingpanelayout-1.2.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\bb004c2d45239142c6e2a01b7ba35993\\transformed\\transition-1.5.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\d0c87259812a447c762ed1d1c4a7a51b\\transformed\\dynamicanimation-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\6200c02f122dff6d9a55dea0dc45202f\\transformed\\legacy-support-core-utils-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\a1b1e516c735a07a31a89380a4cae8b5\\transformed\\loader-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\1f43e0833ed704b3b8f963ce4d24c643\\transformed\\emoji2-views-helper-1.3.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\9cf0b34377c37fc67d4e362bd6db7280\\transformed\\emoji2-1.3.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\9cf0b34377c37fc67d4e362bd6db7280\\transformed\\emoji2-1.3.0\\jars\\libs\\repackaged.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\04bca3bc458139c52bff2fd153dd0217\\transformed\\lifecycle-viewmodel-2.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\1009da914cdb0383faa3de187683a3d8\\transformed\\lifecycle-service-2.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\260fa4fbf07cbb23e448fdb736d55eea\\transformed\\lifecycle-process-2.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\fdb5c715f71bd7db01069c9860ef706d\\transformed\\lifecycle-livedata-core-ktx-2.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\7d96281c5ffddb5fda7b615a614f73a6\\transformed\\lifecycle-livedata-core-2.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\4f2f871c4a96b2d4100f00c7c09a001f\\transformed\\lifecycle-livedata-2.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\2f6109c5fb54eae0fce0336df56a8de1\\transformed\\lifecycle-runtime-ktx-2.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\4600abcd408b6f48792c6fe3340b98b6\\transformed\\lifecycle-viewmodel-savedstate-2.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\a7379727a4e1e35deff415006f0b2dc8\\transformed\\core-ktx-1.13.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\0e657a2cf48ff57d4b7e828319d63084\\transformed\\drawerlayout-1.1.1\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\ac1e1f69bd3cf5466fb0259be7bc91fb\\transformed\\coordinatorlayout-1.1.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\eaf8707a456f29f2c8189e763582004c\\transformed\\vectordrawable-animated-1.1.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\d2201816c3dff05114b0dbb6251b1902\\transformed\\vectordrawable-1.1.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\a1174cd071f2f8b54eeab8c4c1befa92\\transformed\\recyclerview-1.1.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\70b1258ae3d827d537e4f7507f065e8b\\transformed\\viewpager-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\d25f8e829fd3a029f72cf51ddd802f69\\transformed\\customview-1.1.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\82fb9e95c1fe85e3b5095cef80f396ec\\transformed\\window-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\a4f8c7569f62a4c8ded0e114451ff4e5\\transformed\\media-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\2e9fd551142da8455e513cd704c3e60e\\transformed\\swiperefreshlayout-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\bb35586e9d203a772aa450d04d50c851\\transformed\\asynclayoutinflater-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\367ccb1d43ff3918d8755bfb6a71e1a8\\transformed\\core-1.13.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\edd03640bf0763e9b104f3c7734fbd7d\\transformed\\lifecycle-runtime-2.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\d6eb25ef11e7d0fd134bba1cfea5cc36\\transformed\\lifecycle-viewmodel-ktx-2.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\dc96037cc3040032c2c914bbe74e4549\\transformed\\play-services-tasks-18.1.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\285e6a52efdb2d8fab4c0a2af801ed21\\transformed\\play-services-basement-18.3.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\86865095cd24f6e91b5f289c836312d3\\transformed\\fragment-1.6.2\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\de774be673e9cae3282c65f27579999e\\transformed\\activity-1.9.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\f06513fd3671d7c69ca36a99fcba9b13\\transformed\\cursoradapter-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\7b3b5dcfc71476921a72b30981422030\\transformed\\profileinstaller-1.3.1\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\53f2d22cde09e2c3082d7030c8c30bb8\\transformed\\cardview-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\07a92fc8fc72d476f8211a2ada9c3de5\\transformed\\startup-runtime-1.1.1\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\5b7efe580ada63d21ab2a7bd40ef9caa\\transformed\\tracing-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\2cda8d27559317a187e8a8992c6bdf6f\\transformed\\firebase-components-18.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\3c1b4cb235fa8bd048c7a37b749035bd\\transformed\\gifdecoder-4.12.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\d18154f73a09cf987d0cacc8347e9db0\\transformed\\exifinterface-1.2.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\644d8545259daaf20cc7d53cffabc04d\\transformed\\localbroadcastmanager-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\cac6a583e841fcb7a518b861e180db4a\\transformed\\interpolator-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\cb492189066d1d21ba439507b9ba31a3\\transformed\\versionedparcelable-1.1.1\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\11f668a514a46d54e737163fa7ddb028\\transformed\\core-runtime-2.2.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\66e31cf7b5173dcdcda254b48d3f5a5c\\transformed\\documentfile-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\4b80384e56556f45dd16f04f5defbca3\\transformed\\print-1.0.0\\jars\\classes.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\f05cf848dcbfd9c69e0bb5434a966464\\transformed\\annotation-experimental-1.4.0\\jars\\classes.jar;E:\\prm\\PRM392\\app\\build\\intermediates\\compile_and_runtime_not_namespaced_r_class_jar\\debug\\processDebugResources\\R.jar;C:\\Users\\DELL\\.gradle\\caches\\transforms-4\\917914156e722cfafd83d5a6d6915584\\transformed\\android.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 123731968                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 536870912                                 {product} {command line}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 536870912                              {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-20
+CLASSPATH=E:\prm\PRM392\\gradle\wrapper\gradle-wrapper.jar
+PATH=C:\Users\DELL\AppData\Local\Programs\Python\Python312\Scripts\;C:\Program Files\dotnet\;C:\Users\DELL\AppData\Local\Programs\Python\Python312\;C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin;C:\Users\DELL\.kube;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\Java\jdk-20\bin;C:\Program Files\NetBeans 8.2\extide\ant\bin;F:\netbeans-18-bin\netbeans\java\maven\bin;C:\Program Files\Git\cmd;C:\Program Files\apache-tomcat-11.0.0-M6\BIN;C:\zig\zig-windows-x86_64-0.12.0-dev.694+937e8cb70;C:\Users\DELL\AppData\Local\Programs\Python\Python312;C:\Users\DELL\AppData\Local\Programs\Python\Python312\Scripts;E:\Docker\Docker\resources\bin;E:\minikube;C:\Windows\System32;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Users\DELL\AppData\Local\Programs\Python\Python312;F:\node-js\;C:\ProgramData\chocolatey\bin;E:\msys32\ucrt64\bin;C:\Program Files\GitHub CLI\;C:\Program Files\PowerShell\7\;E:\Android\platform-tools;C:\Users\DELL\.cargo\bin;C:\Users\DELL\AppData\Local\Programs\Python\Launcher\;C:\Users\DELL\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\Azure Data Studio\bin;C:\Users\DELL\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\DELL\.dotnet\tools;E:\Neovim\bin;E:\zig\zig-windows-x86_64-0.12.0;C:\Users\DELL\AppData\Roaming\npm;C:\Users\DELL\AppData\Local\Programs\oh-my-posh\bin;C:\Users\DELL\.dotnet\tools
+USERNAME=DELL
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD
+TMP=C:\Users\DELL\AppData\Local\Temp
+TEMP=C:\Users\DELL\AppData\Local\Temp
+
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 22621 (10.0.22621.3672)
+OS uptime: 0 days 0:56 hours
+Hyper-V role detected
+
+CPU: total 12 (initial active 12) (12 cores per cpu, 2 threads per core) family 23 model 104 stepping 1 microcode 0x0, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4a, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, clmul, bmi1, bmi2, adx, sha, fma, vzeroupper, clflush, clflushopt, hv, rdtscp, rdpid, f16c
+
+Memory: 4k page, system-wide physical 7528M (366M free)
+TotalPageFile size 16610M (AvailPageFile size 113M)
+current process WorkingSet (physical memory assigned to process): 11M, peak: 11M
+current process commit charge ("private bytes"): 64M, peak: 182M
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (20.0.1+9-29) for windows-amd64 JRE (20.0.1+9-29), built on 2023-03-07T13:56:11Z by "mach5one" with MS VC++ 17.1 (VS2022)
+
+END.
