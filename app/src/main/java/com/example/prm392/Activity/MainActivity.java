@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity {
         initCategory();
         initPopular();
         bottomNavigation();
+        bottomNavigations();
 
 //        EdgeToEdge.enable(this);
 //        setContentView(R.layout.activity_main);
@@ -52,6 +53,11 @@ public class MainActivity extends BaseActivity {
     private void bottomNavigation(){
         binding.cartBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,CartActivity.class)));
     }
+
+    private void bottomNavigations(){
+        binding.chatBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ChatActivity.class)));
+    }
+
 
     private void initPopular() {
         DatabaseReference myref=database.getReference("Items");
