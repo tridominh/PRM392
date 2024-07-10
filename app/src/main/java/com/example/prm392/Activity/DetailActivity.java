@@ -2,6 +2,8 @@ package com.example.prm392.Activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,7 @@ import com.example.prm392.Fragment.ReviewFragment;
 import com.example.prm392.Fragment.SoldFragment;
 import com.example.prm392.Helper.ManagementCart;
 import com.example.prm392.databinding.ActivityDetailBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,8 @@ public class DetailActivity extends BaseActivity {
     private int numberOrder = 1;
     private ManagementCart managementCart;
     private Handler slideHandler = new Handler();
+    private boolean isAdmin = false; // Assume initially not admin
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,28 @@ public class DetailActivity extends BaseActivity {
         initBanners();
         initSize();
         setupViewPager();
+
+        isAdmin = checkAdminRole();
+
+        if (isAdmin) {
+            binding.btnUpdateProduct.setVisibility(View.VISIBLE);
+            binding.btnDeleteProduct.setVisibility(View.VISIBLE);
+        } else {
+            binding.btnUpdateProduct.setVisibility(View.GONE);
+            binding.btnDeleteProduct.setVisibility(View.GONE);
+        }
+
+        // Set click listeners for admin buttons
+
+        binding.btnUpdateProduct.setOnClickListener(v -> {
+            Toast.makeText(DetailActivity.this, "Update Product clicked", Toast.LENGTH_SHORT).show();
+        });
+
+        binding.btnDeleteProduct.setOnClickListener(v -> {
+            Toast.makeText(DetailActivity.this, "Delete Product clicked", Toast.LENGTH_SHORT).show();
+        });
     }
+
 
     private void initSize() {
         ArrayList<String> list = new ArrayList<>();
@@ -54,6 +80,16 @@ public class DetailActivity extends BaseActivity {
 
         binding.recyclerSize.setAdapter(new SizeAdapter(list));
         binding.recyclerSize.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+    }
+
+    private boolean checkAdminRole() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        if ("tw0DqWTdwNdfEmvn3CCiuwluZqr2".equals(userId)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void initBanners() {

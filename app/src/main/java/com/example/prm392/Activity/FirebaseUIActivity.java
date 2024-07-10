@@ -3,6 +3,7 @@ package com.example.prm392.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
@@ -22,6 +23,11 @@ import com.google.firebase.Firebase;
 import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,7 +47,7 @@ public class FirebaseUIActivity extends AppCompatActivity {
             }
     );
     // [END auth_fui_create_launcher]
-
+    private DatabaseReference userDatabaseReference= FirebaseDatabase.getInstance().getReference().child("Users");;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +90,43 @@ public class FirebaseUIActivity extends AppCompatActivity {
         // [END auth_fui_create_intent]
     }
 
+    public void checkIfUserIsNew(FirebaseUser user) {
+        DatabaseReference userRef = userDatabaseReference.child(user.getUid());
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // User exists, retrieve role or proceed as needed
+                    System.out.println( "User exists: " + snapshot.getValue());
+                } else {
+                    // New user, insert role
+                    insertNewUserRole(user, "user"); // Replace "user" with the appropriate role
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("Failed to read user data" + error.toException());
+            }
+        });
+    }
+    public void insertNewUserRole(FirebaseUser user, String role) {
+        userDatabaseReference.child(user.getUid()).child("role").setValue(role)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            System.out.println("Role successfully added for new user!");
+                        } else {
+                            System.out.println("Error adding role" + task.getException());
+                        }
+                    }
+                });
+        userDatabaseReference.child(user.getUid()).child("userName").setValue(user.getDisplayName());
+
+    }
+
     // [START auth_fui_result]
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
@@ -97,8 +140,9 @@ public class FirebaseUIActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("userName", user.getDisplayName());
                 editor.putString("userEmail", user.getEmail());
-                // Add more user information as needed
+                editor.putString("userUid", user.getUid()); // Lưu UID của người dùng
                 editor.apply();
+                checkIfUserIsNew(user);
             }
             startActivity(new Intent(FirebaseUIActivity.this, MainActivity.class));
             // ...
