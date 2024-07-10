@@ -1,6 +1,7 @@
 package com.example.prm392.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -34,6 +35,14 @@ public class MainActivity extends BaseActivity {
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "");
+        String userEmail = sharedPreferences.getString("userEmail", "");
+
+        // Use userName and userEmail as needed
+        System.out.println("User Name: " + userName);
+        System.out.println("User Email: " + userEmail);
+
         initBanner();
         initCategory();
         initPopular();
@@ -52,6 +61,7 @@ public class MainActivity extends BaseActivity {
 
     private void bottomNavigation(){
         binding.cartBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,CartActivity.class)));
+        binding.profileBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,ProfileActivity.class)));
     }
 
     private void bottomNavigations(){

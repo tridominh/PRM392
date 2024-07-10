@@ -36,7 +36,7 @@ public class ChatActivity extends AppCompatActivity {
     private ChatAdapter chatAdapter;
     private List<ChatMessageDomain> chatMessages;
     private String currentUserId;
-    private String adminUserId = "adminUserId"; // Set the admin user ID here
+    private String adminUserId = "tw0DqWTdwNdfEmvn3CCiuwluZqr2"; // Set the admin user ID here
 
     private DatabaseReference chatDatabaseReference;
 
@@ -83,11 +83,11 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void loadMessages() {
-        chatDatabaseReference.child(currentUserId).child(adminUserId)
-                .addChildEventListener(new ChildEventListener() {
+        chatDatabaseReference.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         ChatMessageDomain chatMessage = dataSnapshot.getValue(ChatMessageDomain.class);
+                        System.out.println(chatMessage);
                         if (chatMessage != null) {
                             chatMessages.add(chatMessage);
                             chatAdapter.notifyDataSetChanged();
