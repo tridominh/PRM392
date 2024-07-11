@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -18,6 +19,7 @@ import com.example.prm392.Adapter.SliderAdapter;
 import com.example.prm392.Domain.CategoryDomain;
 import com.example.prm392.Domain.ItemsDomain;
 import com.example.prm392.Domain.SliderItems;
+import com.example.prm392.Helper.Util;
 import com.example.prm392.databinding.ActivityMainBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,9 +42,40 @@ public class MainActivity extends BaseActivity {
         String userEmail = sharedPreferences.getString("userEmail", "");
 
         // Use userName and userEmail as needed
-        System.out.println("User Name: " + userName);
+        try {
+            System.out.println("User Name: " + userName);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("User Email: " + userEmail);
+        boolean isAdmin = Util.checkAdminRole();
 
+        if (isAdmin) {
+            binding.addProductBtn.setVisibility(View.VISIBLE);
+            binding.addProductBtn.setVisibility(View.VISIBLE);
+        } else {
+            binding.addProductBtn.setVisibility(View.GONE);
+            binding.addProductBtn.setVisibility(View.GONE);
+        }
+        binding.addProductBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Code to run when the button is clicked
+                // For example, you can launch a new activity, show a message, etc.
+                startActivity(new Intent(MainActivity.this,AddProduct.class));
+                //Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+        // Get the intent that started this activity
+        Intent intent = getIntent();
+
+        // Check the action or component name
+        if ("com.example.AddProduct".equals(intent.getComponent().getClassName())) {
+            // Handle if started from a specific activity
+            initPopular();
+        } else {
+            // Default handling for other cases
+        }
         initBanner();
         initCategory();
         initPopular();

@@ -203,6 +203,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/addProductBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Add product"
+                android:layout_marginTop="20dp"
+                android:visibility="visible"
+                />
         </LinearLayout>
     </ScrollView>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
