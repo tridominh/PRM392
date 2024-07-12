@@ -83,6 +83,13 @@ public class AddProduct extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Need image!!!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(binding.nameInput.getText().toString().trim()=="" ||
+                    binding.descriptionInput.getText().toString().trim()=="" ||
+                        binding.quantityInput.getText().toString().trim()=="" ||
+                        binding.priceInput.getText().toString().trim()==""){
+                    Toast.makeText(getApplicationContext(), "Please input full!!!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 ItemDTO dto = new ItemDTO(
                         binding.nameInput.getText().toString().trim(),
                         binding.descriptionInput.getText().toString().trim(),
@@ -94,19 +101,6 @@ public class AddProduct extends AppCompatActivity {
                 Service.addItem(dto);
                 startActivity(new Intent(AddProduct.this, MainActivity.class));
                 Toast.makeText(getApplicationContext(), "Product has been added!!!", Toast.LENGTH_SHORT).show();
-
-                // Check and request permission if necessary
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-//                    if (ContextCompat.checkSelfPermission(AddProduct.this, android.Manifest.permission.READ_MEDIA_IMAGES)
-//                            != PackageManager.PERMISSION_GRANTED) {
-//                        ActivityCompat.requestPermissions(AddProduct.this, new String[]{android.Manifest.permission.READ_MEDIA_IMAGES}, REQUEST_READ_PERMISSION);
-//                    }
-//                } else {
-//                    if (ContextCompat.checkSelfPermission(AddProduct.this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-//                            != PackageManager.PERMISSION_GRANTED) {
-//                        ActivityCompat.requestPermissions(AddProduct.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ_PERMISSION);
-//                    }
-//                }
             }
         });
 
