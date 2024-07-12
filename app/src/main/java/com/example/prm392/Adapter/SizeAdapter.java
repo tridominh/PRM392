@@ -2,7 +2,6 @@ package com.example.prm392.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import com.example.prm392.R;
 import com.example.prm392.databinding.ViewholderSizeBinding;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SizeAdapter extends RecyclerView.Adapter<SizeAdapter.ViewHolder> {
     ArrayList<String> items;
