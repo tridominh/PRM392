@@ -38,6 +38,8 @@ public class Service {
         // Push the object to the database
         itemsRef.push().setValue(newItem);
     }
+
+
 }
 
 

@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
@@ -105,13 +106,13 @@ public class MainActivity extends BaseActivity {
     private void initPopular() {
         DatabaseReference myref=database.getReference("Items");
         binding.progressBarPopular.setVisibility(View.VISIBLE);
-        ArrayList<ItemsDomain> items=new ArrayList<>();
+        HashMap<String, ItemsDomain> items=new HashMap<>();
         myref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     for(DataSnapshot issue:snapshot.getChildren()){
-                        items.add(issue.getValue(ItemsDomain.class));
+                        items.put(issue.getKey() ,issue.getValue(ItemsDomain.class));
                     }
                     if(!items.isEmpty()){
                         binding.recyclerViewPopular.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));

@@ -30,6 +30,7 @@ public class DetailActivity extends BaseActivity {
     ActivityDetailBinding binding;
     private ItemsDomain object;
     private int numberOrder = 1;
+    private String Id;
     private ManagementCart managementCart;
     private Handler slideHandler = new Handler();
     private boolean isAdmin = false; // Assume initially not admin
@@ -106,6 +107,8 @@ public class DetailActivity extends BaseActivity {
 
     private void getBundles() {
         object = (ItemsDomain) getIntent().getSerializableExtra("object");
+        Id = (String) getIntent().getSerializableExtra("id");
+        System.out.println(Id);
         binding.titleTxt.setText(object.getTitle());
         binding.priceTxt.setText("$" + object.getPrice());
         binding.ratingBar.setRating((float) object.getRating());

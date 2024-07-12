@@ -17,13 +17,15 @@ import com.example.prm392.Activity.DetailActivity;
 import com.example.prm392.Domain.ItemsDomain;
 import com.example.prm392.databinding.ViewholderPopListBinding;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewholder> {
-    ArrayList<ItemsDomain> items;
+    HashMap<String, ItemsDomain> items;
     Context context;
 
-    public PopularAdapter(ArrayList<ItemsDomain> items) {
+    public PopularAdapter(HashMap<String, ItemsDomain> items) {
         this.items = items;
     }
 
@@ -36,7 +38,8 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PopularAdapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull PopularAdapter.Viewholder holder, int pos) {
+        String position = (String) items.keySet().toArray()[pos];
         holder.binding.title.setText(items.get(position).getTitle());
         holder.binding.reviewTxt.setText(""+items.get(position).getReview());
         holder.binding.priceTxt.setText("$"+items.get(position).getPrice());
@@ -55,7 +58,9 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("object", items.get(holder.getAdapterPosition()));
+            //intent.putExtra("object", items.get(holder.getAdapterPosition()));
+            intent.putExtra("object", items.get(position));
+            intent.putExtra("id", position);
             context.startActivity(intent);
         });
 
