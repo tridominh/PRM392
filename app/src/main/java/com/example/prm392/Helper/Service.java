@@ -28,6 +28,7 @@ public class Service {
         ItemsDomain newItem = new ItemsDomain(
             dto.title,
             dto.description,
+            dto.quantity,
             pics,
             dto.price,
             100,
@@ -49,6 +50,7 @@ public class Service {
         ItemsDomain updatedItem = new ItemsDomain(
                 updatedDto.title,
                 updatedDto.description,
+                updatedDto.quantity,
                 pics,
                 updatedDto.price,
                 100,
@@ -59,12 +61,11 @@ public class Service {
         itemsRef.child(itemId).setValue(updatedItem);
     }
 
-    public static void deleteItem(String itemId) {
+    public static void deleteItem(String id) {
         if (!Util.checkAdminRole()) {
             return;
         }
-
-        itemsRef.child(itemId).removeValue();
+        itemsRef.child(id).removeValue();
     }
 
 }

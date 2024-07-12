@@ -203,14 +203,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addProductBtn"
+                style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:text="Add product"
                 android:layout_marginTop="20dp"
+                android:background="@drawable/green_button_bg"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 android:visibility="visible"
                 />
         </LinearLayout>
@@ -260,6 +264,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/userManagement_btn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -275,11 +280,37 @@
                         app:srcCompat="@drawable/btn_2" />
 
                     <TextView
-                        android:id="@+id/textView52"
+                        android:id="@+id/textView60"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Wishlist"
+                        android:text="UserManagement"
+                        android:textAlignment="center"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/orderList_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView65"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/btn_3" />
+
+                    <TextView
+                        android:id="@+id/textView65"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="OrderHistory"
                         android:textAlignment="center"
                         android:textSize="12sp" />
                 </LinearLayout>

@@ -67,6 +67,7 @@
 
                 <!-- Explorer Button -->
                 <LinearLayout
+                    android:id="@+id/mainActivity"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -89,26 +90,52 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <!-- Wishlist Button -->
                 <LinearLayout
+                    android:id="@+id/userManagement"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView32_profile"
+                        android:id="@+id/imageView60"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/btn_2" />
 
                     <TextView
-                        android:id="@+id/textView52_profile"
+                        android:id="@+id/textView60"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:text="UserManage"
+                        android:textAlignment="center"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/orderList_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView65"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/btn_3" />
+
+                    <TextView
+                        android:id="@+id/textView65"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Wishlist"
+                        android:text="OrderHistory"
                         android:textAlignment="center"
                         android:textSize="12sp" />
                 </LinearLayout>

@@ -15,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.prm392.Helper.Util;
 import com.example.prm392.R;
 import com.example.prm392.databinding.ActivityProfileBinding;
 import com.firebase.ui.auth.AuthUI;
@@ -52,6 +53,23 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
         }
 
+        boolean isAdmin = Util.checkAdminRole();
+        if (isAdmin) {
+            binding.mainActivity.setVisibility(View.VISIBLE);
+            binding.userManagement.setVisibility(View.VISIBLE);
+            binding.cartBtnProfile.setVisibility(View.GONE);
+            binding.orderListBtn.setVisibility(View.VISIBLE);
+            binding.profileBtnProfile.setVisibility(View.VISIBLE);
+            binding.chatBtnProfile.setVisibility(View.VISIBLE);
+        } else {
+            binding.userManagement.setVisibility(View.GONE);
+            binding.mainActivity.setVisibility(View.VISIBLE);
+            binding.cartBtnProfile.setVisibility(View.VISIBLE);
+            binding.orderListBtn.setVisibility(View.GONE);
+            binding.profileBtnProfile.setVisibility(View.VISIBLE);
+            binding.chatBtnProfile.setVisibility(View.VISIBLE);
+        }
+
         // Set up sign out button
         Button signOutButton = binding.signoutButton; // Use binding for Button
         signOutButton.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +89,7 @@ public class ProfileActivity extends AppCompatActivity {
         binding.cartBtnProfile.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, CartActivity.class)));
         binding.profileBtnProfile.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, ProfileActivity.class)));
         binding.chatBtnProfile.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, ChatActivity.class)));
+        binding.userManagement.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, UserManagementActivity.class)));
     }
 
     public void signOut() {

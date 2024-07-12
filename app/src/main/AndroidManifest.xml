@@ -20,6 +20,9 @@
             android:name=".Activity.AddProduct"
             android:exported="false" />
         <activity
+            android:name=".Activity.UserManagementActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ProfileActivity"
             android:exported="false" />
         <activity

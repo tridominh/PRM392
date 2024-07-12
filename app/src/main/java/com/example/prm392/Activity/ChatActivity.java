@@ -21,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prm392.Adapter.ChatAdapter;
 import com.example.prm392.Domain.ChatMessageDomain;
+import com.example.prm392.Helper.Util;
 import com.example.prm392.R;
+import com.example.prm392.databinding.ActivityChatBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
+    ActivityChatBinding binding;
     private RecyclerView recyclerView;
     private EditText messageEditText;
     private Button sendButton;
@@ -50,11 +53,12 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        binding = ActivityChatBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        recyclerView = findViewById(R.id.recyclerView);
-        messageEditText = findViewById(R.id.messageEditText);
-        sendButton = findViewById(R.id.sendButton);
+        recyclerView = binding.recyclerView;
+        messageEditText = binding.messageEditText;
+        sendButton = binding.sendButton;
 
         currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         chatMessages = new ArrayList<>();
@@ -63,6 +67,21 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(chatAdapter);
+
+        boolean isAdmin = Util.checkAdminRole();
+        if (isAdmin) {
+            binding.mainActivity.setVisibility(View.VISIBLE);
+            binding.userManagement.setVisibility(View.VISIBLE);
+            binding.orderListBtn.setVisibility(View.VISIBLE);
+            binding.profileBtnProfile.setVisibility(View.VISIBLE);
+            binding.cartBtnProfile.setVisibility(View.GONE);
+        } else {
+            binding.userManagement.setVisibility(View.GONE);
+            binding.mainActivity.setVisibility(View.VISIBLE);
+            binding.orderListBtn.setVisibility(View.GONE);
+            binding.cartBtnProfile.setVisibility(View.VISIBLE);
+            binding.profileBtnProfile.setVisibility(View.VISIBLE);
+        }
 
         // Initialize Firebase Database reference
         chatDatabaseReference = FirebaseDatabase.getInstance().getReference().child("chats");
@@ -97,14 +116,18 @@ public class ChatActivity extends AppCompatActivity {
                 startActivity(new Intent(ChatActivity.this, MainActivity.class));
             }
         });
-//
-//        findViewById(R.id.imageView32_profile).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Navigate to Wishlist activity
-//                startActivity(new Intent(ChatActivity.this, WishlistActivity.class));
-//            }
-//        });
+
+        findViewById(R.id.imageView60).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to Explorer activity
+                if (Util.checkAdminRole()) {
+                    startActivity(new Intent(ChatActivity.this, UserManagementActivity.class));
+                } else {
+                    Toast.makeText(ChatActivity.this, "You do not have access to User Management.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         findViewById(R.id.cart_btn_profile).setOnClickListener(new View.OnClickListener() {
             @Override

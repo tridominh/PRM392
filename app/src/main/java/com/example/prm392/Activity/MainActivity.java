@@ -52,50 +52,55 @@ public class MainActivity extends BaseActivity {
         boolean isAdmin = Util.checkAdminRole();
 
         if (isAdmin) {
+            binding.cartBtn.setVisibility(View.GONE);
             binding.addProductBtn.setVisibility(View.VISIBLE);
-            binding.addProductBtn.setVisibility(View.VISIBLE);
+            binding.orderListBtn.setVisibility(View.VISIBLE);
+            binding.chatBtn.setVisibility(View.VISIBLE);
+            binding.userManagementBtn.setVisibility(View.VISIBLE);
         } else {
             binding.addProductBtn.setVisibility(View.GONE);
-            binding.addProductBtn.setVisibility(View.GONE);
+            binding.orderListBtn.setVisibility(View.GONE);
+            binding.userManagementBtn.setVisibility(View.GONE);
         }
         binding.addProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Code to run when the button is clicked
-                // For example, you can launch a new activity, show a message, etc.
                 startActivity(new Intent(MainActivity.this,AddProduct.class));
-                //Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_SHORT).show();
             }
         });
-        // Get the intent that started this activity
+        binding.userManagementBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, UserManagementActivity.class));
+            }
+        });
         Intent intent = getIntent();
 
-        // Check the action or component name
-        if ("com.example.AddProduct".equals(intent.getComponent().getClassName())) {
-            // Handle if started from a specific activity
+        if ("com.example.AddProduct".equals(intent.getComponent().getClassName()) ) {
             initPopular();
-        } else {
-            // Default handling for other cases
+        } else if(intent.getBooleanExtra("reload", false)){
+            initPopular();
+        }
+        else{
+
         }
         initBanner();
         initCategory();
         initPopular();
         bottomNavigation();
         bottomNavigations();
-
-//        EdgeToEdge.enable(this);
-//        setContentView(R.layout.activity_main);
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
-
     }
 
     private void bottomNavigation(){
         binding.cartBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,CartActivity.class)));
         binding.profileBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,ProfileActivity.class)));
+        binding.userManagementBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, UserManagementActivity.class));
+            }
+        });
+
     }
 
     private void bottomNavigations(){

@@ -1,8 +1,13 @@
 package com.example.prm392.Activity;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,16 +19,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prm392.Adapter.SizeAdapter;
 import com.example.prm392.Adapter.SliderAdapter;
+import com.example.prm392.DTO.ItemDTO;
 import com.example.prm392.Domain.ItemsDomain;
 import com.example.prm392.Domain.SliderItems;
 import com.example.prm392.Fragment.DescriptionFragment;
 import com.example.prm392.Fragment.ReviewFragment;
 import com.example.prm392.Fragment.SoldFragment;
 import com.example.prm392.Helper.ManagementCart;
+import com.example.prm392.Helper.Service;
+import com.example.prm392.R;
 import com.example.prm392.databinding.ActivityDetailBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DetailActivity extends BaseActivity {
@@ -61,13 +70,57 @@ public class DetailActivity extends BaseActivity {
 
         // Set click listeners for admin buttons
 
-        binding.btnUpdateProduct.setOnClickListener(v -> {
-            Toast.makeText(DetailActivity.this, "Update Product clicked", Toast.LENGTH_SHORT).show();
-        });
+        binding.btnUpdateProduct.setOnClickListener(v -> showUpdateDialog());
 
         binding.btnDeleteProduct.setOnClickListener(v -> {
+            Service.deleteItem(Id);
             Toast.makeText(DetailActivity.this, "Delete Product clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+            intent.putExtra("reload", true);
+            startActivity(intent);
         });
+    }
+
+    private void showUpdateDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.update_item_dialog, null);
+        builder.setView(dialogView);
+
+        EditText editTitle = dialogView.findViewById(R.id.nameInput);
+        EditText editDescription = dialogView.findViewById(R.id.descriptionInput);
+        EditText editQuantity = dialogView.findViewById(R.id.quantityInput);
+        EditText editPicture = dialogView.findViewById(R.id.picInput);
+        EditText editPrice = dialogView.findViewById(R.id.priceInput);
+        Button btnUpdate = dialogView.findViewById(R.id.btn_update);
+
+        editTitle.setText(object.getTitle());
+        editDescription.setText(object.getDescription());
+        editQuantity.setText(String.valueOf(object.getQuantity()));
+        editPicture.setText(object.getPicUrl().get(0));
+        editPrice.setText(String.valueOf(object.getPrice()));
+
+        AlertDialog dialog = builder.create();
+
+        btnUpdate.setOnClickListener(v -> {
+            String title = editTitle.getText().toString().trim();
+            String description = editDescription.getText().toString().trim();
+            int quantity = Integer.parseInt(editQuantity.getText().toString().trim());
+            String picUrlString = editPicture.getText().toString().trim();
+            ArrayList<String> picUrl = new ArrayList<>(Arrays.asList(picUrlString.split(",")));
+            double price = Double.parseDouble(editPrice.getText().toString().trim());
+
+            ItemDTO updatedDto = new ItemDTO(title, description, quantity, price, object.getPicUrl().get(0));
+            Service.updateItem(Id, updatedDto);
+
+            Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+            intent.putExtra("reload", true);
+            startActivity(intent);
+            dialog.dismiss();
+            Toast.makeText(DetailActivity.this, "Product updated", Toast.LENGTH_SHORT).show();
+        });
+
+        dialog.show();
     }
 
 

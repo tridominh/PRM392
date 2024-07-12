@@ -277,29 +277,6 @@
                                 android:textSize="12sp" />
                         </LinearLayout>
 
-                        <!-- Wishlist Button -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.25"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/imageView32_profile"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                app:srcCompat="@drawable/btn_2" />
-
-                            <TextView
-                                android:id="@+id/textView52_profile"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Wishlist"
-                                android:textAlignment="center"
-                                android:textSize="12sp" />
-                        </LinearLayout>
 
                         <!-- Cart Button -->
                         <LinearLayout

@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.prm392.R;
@@ -25,10 +26,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class FirebaseUIActivity extends AppCompatActivity {
 
@@ -92,19 +96,49 @@ public class FirebaseUIActivity extends AppCompatActivity {
     }
 
     public void insertNewUserRole(FirebaseUser user, String role) {
-        userDatabaseReference.child(user.getUid()).child("role").setValue(role)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.i("FirebaseUIActivity", "Role successfully added for new user!");
-                        } else {
-                            Log.e("FirebaseUIActivity", "Error adding role", task.getException());
-                        }
-                    }
-                });
-        userDatabaseReference.child(user.getUid()).child("userName").setValue(user.getDisplayName());
+        // Tạo một tham chiếu đến biến đếm người dùng trong Firebase
+        DatabaseReference countRef = FirebaseDatabase.getInstance().getReference("userCount");
+
+        // Lấy giá trị hiện tại của biến đếm và cập nhật lên Firebase
+        countRef.runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                // Lấy giá trị hiện tại của biến đếm, nếu chưa có thì đặt giá trị là 0
+                Integer currentValue = mutableData.getValue(Integer.class);
+                if (currentValue == null) {
+                    currentValue = 0;
+                }
+
+                // Tăng giá trị biến đếm lên 1 để lấy ID cho người dùng mới
+                int nextId = currentValue + 1;
+
+                // Lưu giá trị biến đếm mới vào Firebase
+                mutableData.setValue(nextId);
+
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, boolean committed, @Nullable DataSnapshot dataSnapshot) {
+                if (committed) {
+                    // Biến đếm đã được cập nhật thành công, sử dụng giá trị mới để set ID cho người dùng
+                    String userId = String.valueOf(dataSnapshot.getValue(Integer.class));
+
+                    // Thực hiện thêm thông tin người dùng vào Firebase
+                    userDatabaseReference.child(user.getUid()).child("role").setValue(role);
+                    userDatabaseReference.child(user.getUid()).child("userName").setValue(user.getDisplayName());
+                    userDatabaseReference.child(user.getUid()).child("userId").setValue(userId);
+
+                    Log.i("FirebaseUIActivity", "Role successfully added for new user with userId: " + userId);
+                } else {
+                    // Xảy ra lỗi khi cập nhật biến đếm
+                    Log.e("FirebaseUIActivity", "Error updating user count", databaseError != null ? databaseError.toException() : null);
+                }
+            }
+        });
     }
+
 
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
