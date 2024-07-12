@@ -3,11 +3,8 @@ package com.example.prm392.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.prm392.Adapter.CartAdapter;
@@ -23,9 +20,6 @@ import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPayError;
 import vn.zalopay.sdk.ZaloPaySDK;
 import vn.zalopay.sdk.listeners.PayOrderListener;
-
-import me.leolin.shortcutbadger.ShortcutBadger;
-
 
 public class CartActivity extends BaseActivity {
     ActivityCartBinding binding;
@@ -51,6 +45,8 @@ public class CartActivity extends BaseActivity {
         // Khởi tạo danh sách giỏ hàng
         initCartList();
 
+        binding.backBtn.setOnClickListener(v -> finish());
+
         binding.payBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +70,8 @@ public class CartActivity extends BaseActivity {
                                 Intent intent = new Intent(CartActivity.this, ResultActivity.class);
                                 intent.putExtra("result", "Pay successfully");
                                 startActivity(intent);
+
+                                finish();
                             }
 
                             @Override
@@ -120,7 +118,7 @@ public class CartActivity extends BaseActivity {
             // Callback để tính toán lại giỏ hàng khi có thay đổi
             calculatorCart();
             // Cập nhật badge count khi thay đổi số lượng mục trong giỏ hàng
-            updateBadgeCount(managementCart.getListCart().size());
+//            updateBadgeCount(managementCart.getListCart().size());
         }));
 
         // Tính toán các giá trị subtotal, tax, delivery và total của giỏ hàng
@@ -146,12 +144,12 @@ public class CartActivity extends BaseActivity {
     }
 
     // Phương thức cập nhật badge count
-    private void updateBadgeCount(int count) {
-        boolean success = ShortcutBadger.applyCount(this, count);
-        if (!success) {
-            // Hiển thị thông báo Toast nếu cập nhật badge count không thành công
-            Toast.makeText(this, "Failed to apply badge count", Toast.LENGTH_SHORT).show();
-            Log.e("Badge Count", "Failed to apply badge count");
-        }
-    }
+//    private void updateBadgeCount(int count) {
+//        boolean success = ShortcutBadger.applyCount(this, count);
+//        if (!success) {
+//            // Hiển thị thông báo Toast nếu cập nhật badge count không thành công
+//            Toast.makeText(this, "Failed to apply badge count", Toast.LENGTH_SHORT).show();
+//            Log.e("Badge Count", "Failed to apply badge count");
+//        }
+//    }
 }
