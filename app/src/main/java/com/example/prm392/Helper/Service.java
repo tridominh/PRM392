@@ -66,6 +66,7 @@ public class Service {
 
         itemsRef.child(itemId).removeValue();
     }
+
 }
 
 
