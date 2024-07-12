@@ -16,17 +16,21 @@ import com.example.prm392.Helper.ChangeNumberItemsListener;
 import com.example.prm392.Helper.ManagementCart;
 import com.example.prm392.databinding.ViewholderCartBinding;
 
+import me.leolin.shortcutbadger.ShortcutBadger;
+
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
     private ArrayList<ItemsDomain> listItemSelected;
     private ManagementCart managementCart;
     private ChangeNumberItemsListener changeNumberItemsListener;
+    private Context context;
 
     public CartAdapter(ArrayList<ItemsDomain> listItemSelected, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
         this.listItemSelected = listItemSelected;
         this.managementCart = new ManagementCart(context);
         this.changeNumberItemsListener = changeNumberItemsListener;
+        this.context = context;
     }
 
     @NonNull
@@ -43,8 +47,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
         holder.binding.totalEachItem.setText("$" + Math.round((listItemSelected.get(position).getNumberInCart() * listItemSelected.get(position).getPrice())));
         holder.binding.numberItemTxt.setText(String.valueOf(listItemSelected.get(position).getNumberInCart()));
 
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transform(new CenterCrop());
+        RequestOptions requestOptions = new RequestOptions().transform(new CenterCrop());
 
         Glide.with(holder.itemView.getContext())
                 .load(listItemSelected.get(position).getPicUrl().get(0))
@@ -55,6 +58,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
             managementCart.plusItem(listItemSelected, position, () -> {
                 notifyDataSetChanged();
                 changeNumberItemsListener.changed();
+                updateBadgeCount();
             });
         });
 
@@ -62,6 +66,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
             managementCart.minusItem(listItemSelected, position, () -> {
                 notifyDataSetChanged();
                 changeNumberItemsListener.changed();
+                updateBadgeCount();
             });
         });
     }
@@ -69,6 +74,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
     @Override
     public int getItemCount() {
         return listItemSelected.size();
+    }
+
+    private void updateBadgeCount() {
+        int count = managementCart.getListCart().size();
+        boolean success = ShortcutBadger.applyCount(context, count);
+        if (!success) {
+            // Handle failure to apply badge count if necessary
+        }
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
