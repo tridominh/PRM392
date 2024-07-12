@@ -55,4 +55,5 @@ dependencies {
     implementation 'me.leolin:ShortcutBadger:1.1.22@aar'
     implementation 'com.google.firebase:firebase-auth:21.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
 }
