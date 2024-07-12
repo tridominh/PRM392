@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -18,6 +19,7 @@ import com.example.prm392.Adapter.SliderAdapter;
 import com.example.prm392.Domain.CategoryDomain;
 import com.example.prm392.Domain.ItemsDomain;
 import com.example.prm392.Domain.SliderItems;
+import com.example.prm392.Helper.Util;
 import com.example.prm392.databinding.ActivityMainBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
@@ -40,28 +43,64 @@ public class MainActivity extends BaseActivity {
         String userEmail = sharedPreferences.getString("userEmail", "");
 
         // Use userName and userEmail as needed
-        System.out.println("User Name: " + userName);
+        try {
+            System.out.println("User Name: " + userName);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("User Email: " + userEmail);
+        boolean isAdmin = Util.checkAdminRole();
 
+        if (isAdmin) {
+            binding.cartBtn.setVisibility(View.GONE);
+            binding.addProductBtn.setVisibility(View.VISIBLE);
+            binding.orderListBtn.setVisibility(View.VISIBLE);
+            binding.chatBtn.setVisibility(View.VISIBLE);
+            binding.userManagementBtn.setVisibility(View.VISIBLE);
+        } else {
+            binding.addProductBtn.setVisibility(View.GONE);
+            binding.orderListBtn.setVisibility(View.GONE);
+            binding.userManagementBtn.setVisibility(View.GONE);
+        }
+        binding.addProductBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,AddProduct.class));
+            }
+        });
+        binding.userManagementBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, UserManagementActivity.class));
+            }
+        });
+        Intent intent = getIntent();
+
+        if ("com.example.AddProduct".equals(intent.getComponent().getClassName()) ) {
+            initPopular();
+        } else if(intent.getBooleanExtra("reload", false)){
+            initPopular();
+        }
+        else{
+
+        }
         initBanner();
         initCategory();
         initPopular();
         bottomNavigation();
         bottomNavigations();
-
-//        EdgeToEdge.enable(this);
-//        setContentView(R.layout.activity_main);
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
-
     }
 
     private void bottomNavigation(){
         binding.cartBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,CartActivity.class)));
         binding.profileBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,ProfileActivity.class)));
+        binding.userManagementBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, UserManagementActivity.class));
+            }
+        });
+
     }
 
     private void bottomNavigations(){
@@ -72,13 +111,13 @@ public class MainActivity extends BaseActivity {
     private void initPopular() {
         DatabaseReference myref=database.getReference("Items");
         binding.progressBarPopular.setVisibility(View.VISIBLE);
-        ArrayList<ItemsDomain> items=new ArrayList<>();
+        HashMap<String, ItemsDomain> items=new HashMap<>();
         myref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     for(DataSnapshot issue:snapshot.getChildren()){
-                        items.add(issue.getValue(ItemsDomain.class));
+                        items.put(issue.getKey() ,issue.getValue(ItemsDomain.class));
                     }
                     if(!items.isEmpty()){
                         binding.recyclerViewPopular.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));

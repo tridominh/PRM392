@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prm392.Domain.ChatMessageDomain;
 import com.example.prm392.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
-public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_SENT = 1;
     private static final int VIEW_TYPE_RECEIVED = 2;
 
@@ -27,49 +28,64 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public int getItemViewType(int position) {
-        ChatMessageDomain chatMessage = chatMessages.get(position);
-        if (chatMessage.getSenderId().equals(currentUserId)) {
+        ChatMessageDomain message = chatMessages.get(position);
+        if (message.getSenderId().equals(currentUserId)) {
             return VIEW_TYPE_SENT;
         } else {
             return VIEW_TYPE_RECEIVED;
         }
     }
 
+    @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view;
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
-        switch (viewType) {
-            case VIEW_TYPE_SENT:
-                view = inflater.inflate(R.layout.item_message_sent, parent, false);
-                return new SentMessageViewHolder(view);
-            case VIEW_TYPE_RECEIVED:
-                view = inflater.inflate(R.layout.item_message_received, parent, false);
-                return new ReceivedMessageViewHolder(view);
-            default:
-                return null;
+        if (viewType == VIEW_TYPE_SENT) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sent_message, parent, false);
+            return new SentMessageViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_received_message, parent, false);
+            return new ReceivedMessageViewHolder(view);
         }
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ChatMessageDomain chatMessage = chatMessages.get(position);
-        switch (holder.getItemViewType()) {
-            case VIEW_TYPE_SENT:
-                ((SentMessageViewHolder) holder).bind(chatMessage);
-                break;
-            case VIEW_TYPE_RECEIVED:
-                ((ReceivedMessageViewHolder) holder).bind(chatMessage);
-                break;
+        ChatMessageDomain message = chatMessages.get(position);
+        if (holder instanceof SentMessageViewHolder) {
+            ((SentMessageViewHolder) holder).bind(message);
+        } else {
+            ((ReceivedMessageViewHolder) holder).bind(message);
         }
     }
-
 
     @Override
     public int getItemCount() {
         return chatMessages.size();
     }
 
+    static class SentMessageViewHolder extends RecyclerView.ViewHolder {
+        TextView sentMessageTextView;
+
+        SentMessageViewHolder(@NonNull View itemView) {
+            super(itemView);
+            sentMessageTextView = itemView.findViewById(R.id.sentMessageTextView);
+        }
+
+        void bind(ChatMessageDomain message) {
+            sentMessageTextView.setText(message.getMessage());
+        }
+    }
+
+    static class ReceivedMessageViewHolder extends RecyclerView.ViewHolder {
+        TextView receivedMessageTextView;
+
+        ReceivedMessageViewHolder(@NonNull View itemView) {
+            super(itemView);
+            receivedMessageTextView = itemView.findViewById(R.id.receivedMessageTextView);
+        }
+
+        void bind(ChatMessageDomain message) {
+            receivedMessageTextView.setText(message.getMessage());
+        }
+    }
 }
