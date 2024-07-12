@@ -93,7 +93,8 @@
                     android:hint="Enter your coupon"
                     android:inputType="text"
                     android:paddingStart="8dp"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:minHeight="48dp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button"
@@ -104,7 +105,8 @@
                     android:background="@drawable/green_button_bg"
                     android:text="Apply"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:minHeight="48dp"/>
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -225,7 +227,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button3"
+                android:id="@+id/payBtn"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

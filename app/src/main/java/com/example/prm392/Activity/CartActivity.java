@@ -2,6 +2,7 @@ package com.example.prm392.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -10,13 +11,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.prm392.Adapter.CartAdapter;
+import com.example.prm392.Api.CreateOrder;
 import com.example.prm392.Helper.ManagementCart;
-import com.example.prm392.R;
 import com.example.prm392.databinding.ActivityCartBinding;
+
+import org.json.JSONObject;
+
+import java.math.BigDecimal;
+
+import vn.zalopay.sdk.Environment;
+import vn.zalopay.sdk.ZaloPayError;
+import vn.zalopay.sdk.ZaloPaySDK;
+import vn.zalopay.sdk.listeners.PayOrderListener;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 
-public class CartActivity extends AppCompatActivity {
+
+public class CartActivity extends BaseActivity {
     ActivityCartBinding binding;
     private double tax;
     private ManagementCart managementCart;
@@ -27,35 +38,72 @@ public class CartActivity extends AppCompatActivity {
         binding = ActivityCartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+        StrictMode.ThreadPolicy policy = new
+                StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        // ZaloPay SDK Init
+        ZaloPaySDK.init(2553, Environment.SANDBOX);
+
         managementCart = new ManagementCart(this);
 
         // Khởi tạo danh sách giỏ hàng
         initCartList();
 
-        // Xử lý sự kiện nút back
-        binding.backBtn.setOnClickListener(v -> finish());
-        setBottomNavigationListeners();
+        binding.payBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateOrder orderApi = new CreateOrder();
+
+                double delivery = 10;
+                double total = Math.round((managementCart.getTotalFee() + tax + delivery)*100)/100;
+                BigDecimal convertedTotalPrice = new BigDecimal(total).multiply(BigDecimal.valueOf(25000));
+
+                try {
+                    JSONObject data = orderApi.createOrder(convertedTotalPrice.toPlainString());
+                    String code = data.getString("return_code");
+
+                    if (code.equals("1")) {
+                        String token = data.getString("zp_trans_token");
+                        ZaloPaySDK.getInstance().payOrder(CartActivity.this, token, "demozpdk://app", new PayOrderListener() {
+                            @Override
+                            public void onPaymentSucceeded(String s, String s1, String s2) {
+                                managementCart.clearItems();
+
+                                Intent intent = new Intent(CartActivity.this, ResultActivity.class);
+                                intent.putExtra("result", "Pay successfully");
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onPaymentCanceled(String s, String s1) {
+                                Intent intent = new Intent(CartActivity.this, ResultActivity.class);
+                                intent.putExtra("result", "Payment is cancelled");
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
+                                Intent intent = new Intent(CartActivity.this, ResultActivity.class);
+                                intent.putExtra("result", "Payment Error");
+                                startActivity(intent);
+                            }
+                        });
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
-    private void setBottomNavigationListeners() {
-        findViewById(R.id.imageView31_profile).setOnClickListener(v -> {
-             startActivity(new Intent(CartActivity.this, MainActivity.class));
-         });
-//
-//        findViewById(R.id.imageView32_profile).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Navigate to Wishlist activity
-//                startActivity(new Intent(ChatActivity.this, WishlistActivity.class));
-//            }
-//        });
-
-        findViewById(R.id.cart_btn_profile).setOnClickListener(v -> startActivity(new Intent(CartActivity.this, CartActivity.class)));
-
-        findViewById(R.id.profile_btn_profile).setOnClickListener(v -> startActivity(new Intent(CartActivity.this, ProfileActivity.class)));
-
-        binding.chatBtn.setOnClickListener(v -> startActivity(new Intent(CartActivity.this, ChatActivity.class)));
-
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ZaloPaySDK.getInstance().onResult(intent);
     }
 
     private void initCartList() {
