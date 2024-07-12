@@ -38,7 +38,14 @@ public class Service {
         // Push the object to the database
         itemsRef.push().setValue(newItem);
     }
-
+    public static void deleteItem(String id) {
+        // Check if current user is admin
+        if (!Util.checkAdminRole()) {
+            // Handle case where user is not authorized
+            return;
+        }
+        itemsRef.child(id).removeValue();
+    }
 
 }
 

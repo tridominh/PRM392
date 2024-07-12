@@ -170,20 +170,28 @@
                     android:text="Add Product"
                     android:visibility="gone" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnUpdateProduct"
+                    style="@android:style/Widget.Button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/green_button_bg"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
                     android:text="Update Product"
                     android:visibility="visible" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnDeleteProduct"
+                    style="@android:style/Widget.Button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Delete Product"
+                    android:background="@drawable/green_button_bg"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
                     android:visibility="visible" />
             </LinearLayout>
 

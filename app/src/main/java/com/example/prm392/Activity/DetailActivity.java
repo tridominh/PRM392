@@ -1,5 +1,6 @@
 package com.example.prm392.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.example.prm392.Fragment.DescriptionFragment;
 import com.example.prm392.Fragment.ReviewFragment;
 import com.example.prm392.Fragment.SoldFragment;
 import com.example.prm392.Helper.ManagementCart;
+import com.example.prm392.Helper.Service;
 import com.example.prm392.databinding.ActivityDetailBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -66,7 +68,11 @@ public class DetailActivity extends BaseActivity {
         });
 
         binding.btnDeleteProduct.setOnClickListener(v -> {
+            Service.deleteItem(Id);
             Toast.makeText(DetailActivity.this, "Delete Product clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+            intent.putExtra("reload", true);
+            startActivity(intent);
         });
     }
 

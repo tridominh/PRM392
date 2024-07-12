@@ -71,11 +71,15 @@ public class MainActivity extends BaseActivity {
         Intent intent = getIntent();
 
         // Check the action or component name
-        if ("com.example.AddProduct".equals(intent.getComponent().getClassName())) {
+        if ("com.example.AddProduct".equals(intent.getComponent().getClassName()) ) {
             // Handle if started from a specific activity
             initPopular();
-        } else {
+        } else if(intent.getBooleanExtra("reload", false)){
             // Default handling for other cases
+            initPopular();
+        }
+        else{
+
         }
         initBanner();
         initCategory();
