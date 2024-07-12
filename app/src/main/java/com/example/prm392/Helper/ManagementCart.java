@@ -16,6 +16,12 @@ public class ManagementCart {
         this.tinyDB = new TinyDB(context);
     }
 
+    public void clearItems() {
+        ArrayList<ItemsDomain> listItem = getListCart();
+        listItem.clear();
+        tinyDB.putListObject("CartList", listItem);
+    }
+
     public void insertItem(ItemsDomain item) {
         ArrayList<ItemsDomain> listItem = getListCart();
         boolean existAlready = false;
