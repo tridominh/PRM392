@@ -86,9 +86,10 @@ public class AddProduct extends AppCompatActivity {
                 ItemDTO dto = new ItemDTO(
                         binding.nameInput.getText().toString().trim(),
                         binding.descriptionInput.getText().toString().trim(),
+                        Integer.parseInt(binding.quantityInput.getText().toString().trim()),
                         //binding.picInput.getText().toString().trim(),
-                        imageUrl,
-                        Double.parseDouble(binding.priceInput.getText().toString().trim())
+                        Double.parseDouble(binding.priceInput.getText().toString().trim()),
+                        imageUrl
                 );
                 Service.addItem(dto);
                 startActivity(new Intent(AddProduct.this, MainActivity.class));
