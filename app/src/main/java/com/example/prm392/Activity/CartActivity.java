@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +23,9 @@ import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPayError;
 import vn.zalopay.sdk.ZaloPaySDK;
 import vn.zalopay.sdk.listeners.PayOrderListener;
+
+import me.leolin.shortcutbadger.ShortcutBadger;
+
 
 public class CartActivity extends BaseActivity {
     ActivityCartBinding binding;
@@ -103,33 +107,45 @@ public class CartActivity extends BaseActivity {
         ZaloPaySDK.getInstance().onResult(intent);
     }
 
-    private void initCartList(){
-        if(managementCart.getListCart().isEmpty()){
+    private void initCartList() {
+        if (managementCart.getListCart().isEmpty()) {
             binding.emptyTxt.setVisibility(View.VISIBLE);
             binding.scrollViewCart.setVisibility(View.GONE);
-        }else{
+        } else {
             binding.emptyTxt.setVisibility(View.GONE);
             binding.scrollViewCart.setVisibility(View.VISIBLE);
         }
-        binding.cartView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        binding.cartView.setAdapter(new CartAdapter(managementCart.getListCart(), this, () -> calculatorCart()));
+        binding.cartView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.cartView.setAdapter(new CartAdapter(managementCart.getListCart(), this, () -> {
+            calculatorCart();
+            updateBadgeCount(managementCart.getListCart().size());
+        }));
     }
 
-    private void setVariable(){
+    private void setVariable() {
         binding.backBtn.setOnClickListener(v -> finish());
     }
 
-    private void calculatorCart(){
+    private void calculatorCart() {
         double percentTax = 0.02;
         double delivery = 10;
-        tax=Math.round((managementCart.getTotalFee()*percentTax*100.0))/100.0;
+        tax = Math.round((managementCart.getTotalFee() * percentTax * 100.0)) / 100.0;
 
-        double total = Math.round((managementCart.getTotalFee() + tax + delivery)*100)/100;
-        double itemTotal = Math.round(managementCart.getTotalFee() * 100) / 100;
+        double total = Math.round((managementCart.getTotalFee() + tax + delivery) * 100.0) / 100.0;
+        double itemTotal = Math.round(managementCart.getTotalFee() * 100.0) / 100.0;
 
         binding.totalFeeTxt.setText("$" + itemTotal);
         binding.taxTxt.setText("$" + tax);
         binding.deliveryTxt.setText("$" + delivery);
         binding.totalTxt.setText("$" + total);
+    }
+
+    private void updateBadgeCount(int count) {
+        boolean success = ShortcutBadger.applyCount(this, count);
+        if (!success) {
+            // Notify the user with a Toast message
+            Toast.makeText(this, "Failed to apply badge count", Toast.LENGTH_SHORT).show();
+            Log.e("Badge Count", "Failed to apply badge count");
+        }
     }
 }
