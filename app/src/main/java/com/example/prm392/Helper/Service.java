@@ -35,8 +35,36 @@ public class Service {
             10
         );
 
-        // Push the object to the database
         itemsRef.push().setValue(newItem);
+    }
+
+    public static void updateItem(String itemId, ItemDTO updatedDto) {
+        if (!Util.checkAdminRole()) {
+            return;
+        }
+
+        ArrayList<String> pics = new ArrayList<>();
+        pics.add(updatedDto.picUrl);
+
+        ItemsDomain updatedItem = new ItemsDomain(
+                updatedDto.title,
+                updatedDto.description,
+                pics,
+                updatedDto.price,
+                100,
+                10,
+                10
+        );
+
+        itemsRef.child(itemId).setValue(updatedItem);
+    }
+
+    public static void deleteItem(String itemId) {
+        if (!Util.checkAdminRole()) {
+            return;
+        }
+
+        itemsRef.child(itemId).removeValue();
     }
 }
 

@@ -7,6 +7,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -79,6 +82,50 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sendMessage();
+            }
+        });
+
+        // Set click listeners for bottom navigation buttons
+        setBottomNavigationListeners();
+    }
+
+    private void setBottomNavigationListeners() {
+        findViewById(R.id.imageView31_profile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to Explorer activity
+                startActivity(new Intent(ChatActivity.this, MainActivity.class));
+            }
+        });
+//
+//        findViewById(R.id.imageView32_profile).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Navigate to Wishlist activity
+//                startActivity(new Intent(ChatActivity.this, WishlistActivity.class));
+//            }
+//        });
+
+        findViewById(R.id.cart_btn_profile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to Cart activity
+                startActivity(new Intent(ChatActivity.this, CartActivity.class));
+            }
+        });
+
+        findViewById(R.id.profile_btn_profile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to Profile activity
+                startActivity(new Intent(ChatActivity.this, ProfileActivity.class));
+            }
+        });
+
+        findViewById(R.id.chatBtn_profile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Stay in Chat activity
             }
         });
     }
@@ -204,14 +251,29 @@ public class ChatActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        chatDatabaseReference.child(chatUserId).child(currentUserId).child(messageId).setValue(message);
-                        messageEditText.setText("");
-                        scrollToBottom();
+                        // Message sent successfully
+                        chatDatabaseReference.child(chatUserId).child(currentUserId).child(messageId)
+                                .setValue(message)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        // Message stored in recipient's chat as well
+                                        messageEditText.setText(""); // Clear the input field
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // Handle failure to store message for recipient
+                                        Toast.makeText(ChatActivity.this, "Failed to send message to recipient: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        // Handle failure to send message
                         Toast.makeText(ChatActivity.this, "Failed to send message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

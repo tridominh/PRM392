@@ -65,6 +65,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void bottomNavigation() {
+        findViewById(R.id.imageView31_profile).setOnClickListener(v -> {
+            startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+        });
         binding.cartBtnProfile.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, CartActivity.class)));
         binding.profileBtnProfile.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, ProfileActivity.class)));
         binding.chatBtnProfile.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, ChatActivity.class)));

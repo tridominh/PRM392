@@ -34,21 +34,17 @@ public class AddProduct extends AppCompatActivity {
         });
         binding = ActivityAddProductBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.confirmAddBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Code to run when the button is clicked
-                // For example, you can launch a new activity, show a message, etc.
-                ItemDTO dto = new ItemDTO(
-                        binding.nameInput.getText().toString().trim(),
-                        binding.descriptionInput.getText().toString().trim(),
-                        binding.picInput.getText().toString().trim(),
-                        Double.parseDouble(binding.priceInput.getText().toString().trim())
-                );
-                Service.addItem(dto);
-                startActivity(new Intent(AddProduct.this, MainActivity.class));
-                Toast.makeText(getApplicationContext(), "Product has been added!!!", Toast.LENGTH_SHORT).show();
-            }
+        binding.confirmAddBtn.setOnClickListener(v -> {
+
+            ItemDTO dto = new ItemDTO(
+                    binding.nameInput.getText().toString().trim(),
+                    binding.descriptionInput.getText().toString().trim(),
+                    binding.picInput.getText().toString().trim(),
+                    Double.parseDouble(binding.priceInput.getText().toString().trim())
+            );
+            Service.addItem(dto);
+            startActivity(new Intent(AddProduct.this, MainActivity.class));
+            Toast.makeText(getApplicationContext(), "Product has been added!!!", Toast.LENGTH_SHORT).show();
         });
     }
 }
