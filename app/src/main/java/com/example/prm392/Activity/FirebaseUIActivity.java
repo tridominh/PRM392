@@ -129,6 +129,10 @@ public class FirebaseUIActivity extends AppCompatActivity {
                     userDatabaseReference.child(user.getUid()).child("role").setValue(role);
                     userDatabaseReference.child(user.getUid()).child("userName").setValue(user.getDisplayName());
                     userDatabaseReference.child(user.getUid()).child("userId").setValue(userId);
+                    //Th
+                    SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("userId", userId);
 
                     Log.i("FirebaseUIActivity", "Role successfully added for new user with userId: " + userId);
                 } else {

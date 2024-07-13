@@ -34,6 +34,9 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        String userId = sharedPreferences.getString("userId", "");
+        System.out.println("User Id Profile: "+userId);
 
         EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(binding.welcomeMessage, (v, insets) -> {

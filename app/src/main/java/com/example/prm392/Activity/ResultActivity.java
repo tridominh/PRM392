@@ -20,7 +20,8 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        txtPaymentNotification = findViewById(R.id.txtPaymentNotification);
+        txtPaymentNotification =  findViewById(R.id.txtPaymentNotification);
+        btnBack = findViewById(R.id.btnBack);
 
         Intent intent = new Intent();
         String result = intent.getStringExtra("result");
@@ -29,6 +30,9 @@ public class ResultActivity extends AppCompatActivity {
             txtPaymentNotification.setText(intent.getStringExtra("result"));
         }
 
-        btnBack.setOnClickListener(v -> finish());
+        btnBack.setOnClickListener(v -> {
+            Intent intent1 = new Intent(ResultActivity.this, MainActivity.class);
+            startActivity(intent1);
+        });
     }
 }
