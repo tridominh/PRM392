@@ -25,7 +25,7 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = new Intent();
         String result = intent.getStringExtra("result");
 
-        if(result != null && !result.isBlank()) {
+        if(result != null && !result.isEmpty()) {
             txtPaymentNotification.setText(intent.getStringExtra("result"));
         }
 
