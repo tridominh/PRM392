@@ -27,10 +27,86 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="25dp"
                 android:paddingTop="16dp"
                 android:text="Welcome, User!"
                 android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username:"
+                android:textSize="16sp"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:id="@+id/usernameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username:"
+                android:textSize="16sp"
+                android:layout_marginStart="54dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address:"
+                android:layout_marginStart="20dp"
+                android:textSize="16sp"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"/>
+            <TextView
+                android:id="@+id/addressTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address:"
+                android:layout_marginStart="67dp"
+                android:textSize="16sp"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number:"
+                android:layout_marginStart="20dp"
+                android:textSize="16sp"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"/>
+            <TextView
+                android:id="@+id/phoneNumberTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number:"
+                android:layout_marginStart="20dp"
+                android:textSize="16sp"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/editProfileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"/>
+
 
             <Button
                 android:id="@+id/signoutButton"
@@ -40,6 +116,7 @@
                 android:text="Logout"
                 android:textColor="@color/white"
                 android:textSize="14sp"
+                android:layout_marginTop="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/welcomeMessage" />

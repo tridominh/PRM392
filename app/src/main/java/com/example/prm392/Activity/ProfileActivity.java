@@ -1,10 +1,12 @@
 package com.example.prm392.Activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.prm392.Domain.UserDomain;
 import com.example.prm392.Helper.Util;
 import com.example.prm392.R;
 import com.example.prm392.databinding.ActivityProfileBinding;
@@ -23,6 +26,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -34,9 +42,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-        String userId = sharedPreferences.getString("userId", "");
-        System.out.println("User Id Profile: "+userId);
 
         EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(binding.welcomeMessage, (v, insets) -> {
@@ -45,13 +50,29 @@ public class ProfileActivity extends AppCompatActivity {
             return insets;
         });
 
-        welcomeTextView = binding.welcomeMessage; // Use binding for TextView
+        welcomeTextView = binding.welcomeMessage;
 
-        // Retrieve the current user and set the welcome message
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            String userName = currentUser.getDisplayName();
-            welcomeTextView.setText("Welcome " + userName);
+            String userId = currentUser.getUid();
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    UserDomain user = dataSnapshot.getValue(UserDomain.class);
+                    if (user != null) {
+                        binding.welcomeMessage.setText("Welcome " + user.getUserName());
+                        binding.usernameTextView.setText(user.getUserName());
+                        binding.addressTextView.setText(user.getAddress());
+                        binding.phoneNumberTextView.setText(user.getPhoneNumber());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(ProfileActivity.this, "Failed to load user data", Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
         }
@@ -73,8 +94,14 @@ public class ProfileActivity extends AppCompatActivity {
             binding.chatBtnProfile.setVisibility(View.VISIBLE);
         }
 
-        // Set up sign out button
-        Button signOutButton = binding.signoutButton; // Use binding for Button
+        binding.editProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEditProfileDialog();
+            }
+        });
+
+        Button signOutButton = binding.signoutButton;
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,8 +109,58 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        bottomNavigation(); // Set up bottom navigation buttons
+        bottomNavigation();
     }
+
+    private void showEditProfileDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_edit_profile);
+
+        EditText editUsername = dialog.findViewById(R.id.editUsername);
+        EditText editAddress = dialog.findViewById(R.id.editAddress);
+        EditText editPhoneNumber = dialog.findViewById(R.id.editPhoneNumber);
+        Button updateButton = dialog.findViewById(R.id.updateButton);
+
+        // Pre-fill the fields with current user info
+        editUsername.setText(binding.usernameTextView.getText());
+        editAddress.setText(binding.addressTextView.getText());
+        editPhoneNumber.setText(binding.phoneNumberTextView.getText());
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newUsername = editUsername.getText().toString();
+                String newAddress = editAddress.getText().toString();
+                String newPhoneNumber = editPhoneNumber.getText().toString();
+
+                // Update the user info in Firebase
+                updateUserProfile(newUsername, newAddress, newPhoneNumber);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void updateUserProfile(String newUsername, String newAddress, String newPhoneNumber) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+
+            userRef.child("userName").setValue(newUsername);
+            userRef.child("address").setValue(newAddress);
+            userRef.child("phoneNumber").setValue(newPhoneNumber);
+
+            // Update local views
+            binding.usernameTextView.setText(newUsername);
+            binding.addressTextView.setText(newAddress);
+            binding.phoneNumberTextView.setText(newPhoneNumber);
+
+            Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     private void bottomNavigation() {
         findViewById(R.id.imageView31_profile).setOnClickListener(v -> {
@@ -96,7 +173,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void signOut() {
-        // [START auth_fui_signout]
         AuthUI.getInstance()
                 .signOut(this)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -107,6 +183,5 @@ public class ProfileActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-        // [END auth_fui_signout]
     }
 }
